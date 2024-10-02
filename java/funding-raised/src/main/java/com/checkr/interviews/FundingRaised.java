@@ -1,6 +1,8 @@
-package com.acme.interviews;
+package com.checkr.interviews;
 
 import java.util.*;
+
+import com.checkr.interviews.NoSuchEntryException;
 import com.opencsv.CSVReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -167,7 +169,7 @@ public class FundingRaised {
             return mapped;
         }
 
-        throw new NoSuchEntryException();
+        throw new NoSuchEntryException("problem");
     }
 
     public static void main(String[] args) {
@@ -183,4 +185,4 @@ public class FundingRaised {
     }
 }
 
-class NoSuchEntryException extends Exception {}
+

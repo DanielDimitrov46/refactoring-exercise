@@ -1,7 +1,9 @@
-package com.acme.interviews;
+package com.checkr.interviews;
 import java.util.*;
 import java.io.IOException;
+import com.checkr.interviews.FundingRaised;
 
+import com.checkr.interviews.NoSuchEntryException;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -139,9 +141,8 @@ public class FundingRaisedTest
         } catch(IOException e) {
             System.out.print(e.getMessage());
             System.out.print("error");
-        } catch(NoSuchEntryException e) {
-            System.out.print(e.getMessage());
-            System.out.print("error");
+        } catch (NoSuchEntryException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -160,16 +161,13 @@ public class FundingRaisedTest
             assertEquals(row.get("funded_date"), "1-Dec-06");
             assertEquals(row.get("raised_amount"), "8500000");
             assertEquals(row.get("round"), "b");
-        } catch(IOException e) {
-            System.out.print(e.getMessage());
-            System.out.print("error");
-        } catch(NoSuchEntryException e) {
+        } catch(IOException | NoSuchEntryException e) {
             System.out.print(e.getMessage());
             System.out.print("error");
         }
     }
 
-    public void testFindByMultipleOptions() {
+    public void testFindByMultipleOptions() throws NoSuchEntryException {
         try {
             Map<String, String> options = new HashMap<String, String> ();
             options.put("company_name", "Facebook");
@@ -188,13 +186,10 @@ public class FundingRaisedTest
         } catch(IOException e) {
             System.out.print(e.getMessage());
             System.out.print("error");
-        } catch(NoSuchEntryException e) {
-            System.out.print(e.getMessage());
-            System.out.print("error");
         }
     }
 
-    public void testFindByNotExists() {
+    public void testFindByNotExists() throws NoSuchEntryException {
         try {
             Map<String, String> options = new HashMap<String, String> ();
             options.put("company_name", "NotFacebook");
@@ -204,7 +199,8 @@ public class FundingRaisedTest
         } catch(IOException e) {
             System.out.print(e.getMessage());
             System.out.print("error");
-        } catch(NoSuchEntryException e) {
+        } catch (NoSuchEntryException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
